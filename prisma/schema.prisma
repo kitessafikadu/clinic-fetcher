@@ -13,3 +13,8 @@ model Appointment {
   doctor  String
   time    DateTime
 }
+model Clinic {
+  id        Int     @id
+  name      String
+  available Boolean
+}
