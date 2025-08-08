@@ -1,9 +1,23 @@
 version: '3.8'
+
 services:
-  db:
+  clinic-app:
+    build: .
+    container_name: clinic-app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - clinic-postgres
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - API_URL=${API_URL}
+    volumes:
+      - .:/app
+    command: npm run start:dev
+
+  clinic-postgres:
     image: postgres:15
     container_name: clinic-postgres
-    restart: always
     ports:
       - '5432:5432'
     environment:
@@ -12,6 +26,17 @@ services:
       POSTGRES_DB: clinicdb
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    ports:
+      - '5050:80'
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - clinic-postgres
 
 volumes:
   pgdata:
