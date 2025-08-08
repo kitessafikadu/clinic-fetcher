@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { FetchModule } from './fetch/fetch.module';
 
 @Module({
-  imports: [],
+  imports: [FetchModule],
   controllers: [AppController],
   providers: [AppService],
 })
