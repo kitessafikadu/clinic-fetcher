@@ -6,7 +6,7 @@ export class ClinicController {
   constructor(private readonly clinicService: ClinicService) {}
 
   @Get('fetch')
-  fetchClinics() {
+  fetchAndSave() {
     return this.clinicService.fetchAndSaveClinics();
   }
 }

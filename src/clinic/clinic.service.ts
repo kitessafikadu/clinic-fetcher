@@ -16,6 +16,11 @@ export class ClinicService {
       throw new Error('API_URL environment variable is not defined');
     }
     const { data } = await firstValueFrom(this.httpService.get(url));
+    console.log('Fetched data:', data);
+
+    if (!Array.isArray(data)) {
+      throw new Error('API did not return an array');
+    }
 
     const saved = await Promise.all(
       data.map((clinic) =>
