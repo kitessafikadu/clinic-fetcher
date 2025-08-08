@@ -1,12 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { FetchModule } from './fetch/fetch.module';
+import { HttpModule } from '@nestjs/axios';
 import { ClinicModule } from './clinic/clinic.module';
 
 @Module({
-  imports: [FetchModule, ClinicModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [HttpModule, ClinicModule],
 })
 export class AppModule {}
