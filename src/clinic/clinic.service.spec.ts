@@ -6,8 +6,8 @@ import { of } from 'rxjs';
 
 describe('ClinicService', () => {
   let service: ClinicService;
-  let httpService: Partial<HttpService>;
-  let prismaService: Partial<PrismaService>;
+  let httpService: { get: jest.Mock };
+  let prismaService: { clinic: { upsert: jest.Mock } };
 
   beforeEach(async () => {
     httpService = {
@@ -24,6 +24,8 @@ describe('ClinicService', () => {
           .mockResolvedValue({ id: 1, name: 'Test Clinic', available: true }),
       },
     };
+
+    process.env.API_URL = 'http://test-url.com';
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
